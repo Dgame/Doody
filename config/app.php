@@ -143,6 +143,10 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /*
+         * Third Party Providers
+         */
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
         'Pingpong\Modules\ModulesServiceProvider',
     ],
 
