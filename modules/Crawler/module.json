@@ -1,0 +1,15 @@
+{
+    "name": "Crawler",
+    "alias": "crawler",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Crawler\\Providers\\CrawlerServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}
