@@ -5,8 +5,8 @@ namespace Doody\Client\Client;
 use Doody\Client\Header\HeaderProvider;
 
 /**
- * Class BaseClient
- * @package Client
+ * Class Client
+ * @package Doody\Client\Client
  */
 final class Client
 {

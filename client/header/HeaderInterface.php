@@ -1,10 +1,10 @@
 <?php
 
-namespace Client\Header;
+namespace Doody\Client\Header;
 
 /**
  * Interface HeaderInterface
- * @package Client\Header
+ * @package Doody\Client\Header
  */
 interface HeaderInterface
 {

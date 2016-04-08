@@ -1,17 +1,17 @@
 <?php
 
-namespace Client\Header;
+namespace Doody\Client\Header;
 
 /**
  * Class Header
- * @package Client\Header
+ * @package Doody\Client\Header
  */
 class Header implements HeaderInterface
 {
     const HEADER = '%s: %s';
 
     /**
-     * @var null
+     * @var null|string
      */
     private $_header = null;
     /**

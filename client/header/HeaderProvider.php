@@ -1,10 +1,10 @@
 <?php
 
-namespace Client\Header;
+namespace Doody\Client\Header;
 
 /**
  * Class HeaderProvider
- * @package Client\Header
+ * @package Doody\Client\Header
  */
 final class HeaderProvider implements HeaderInterface
 {
