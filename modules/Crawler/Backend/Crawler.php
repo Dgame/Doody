@@ -1,12 +1,12 @@
 <?php
 
-namespace Doody\Crowler;
+namespace Modules\Crawler\Backend;
 
 /**
- * Class Crowler
- * @package Doody\Crowler
+ * Class Crawler
+ * @package Modules\Crawler\Backend
  */
-final class Crowler
+final class Crawler
 {
     /**
      * @var null|string
@@ -33,7 +33,7 @@ final class Crowler
      */
     public function scan()
     {
-
+        
     }
 }
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Doody\Crowler;
+namespace Modules\Crawler\Backend;
 
 /**
  * Class Score
- * @package Doody\Crowler
+ * @package Modules\Crawler\Backend
  */
 final class Score
 {

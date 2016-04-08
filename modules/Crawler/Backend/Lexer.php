@@ -1,10 +1,10 @@
 <?php
 
-namespace Doody\Crowler;
+namespace Modules\Crawler\Backend;
 
 /**
  * Class Lexer
- * @package Doody\Crowler
+ * @package Modules\Crawler\Backend
  */
 final class Lexer
 {
@@ -42,7 +42,6 @@ final class Lexer
             $pos = 0;
             while (($pos = strpos($content, $kword, $pos)) !== false) {
                 $results[$kword]++;
-
 //                print 'Found keword ' . $kword . ' @ ' . $pos . PHP_EOL;
                 $pos += $len;
             }
