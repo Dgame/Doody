@@ -2,6 +2,8 @@
 
 namespace Modules\Crawler\Backend;
 
+use Modules\Crawler\Backend\Client\Client;
+
 /**
  * Class Crawler
  * @package Modules\Crawler\Backend
@@ -29,11 +31,15 @@ final class Crawler
     }
 
     /**
-     *
+     * @param Client $client
+     * @param Lexer  $lexer
      */
-    public function scan()
+    public function scan(Client $client, Lexer $lexer)
     {
-        
+        $content = $client->receive($this->getUrl());
+        $score = $lexer->caclulateScore($content);
+
+        print_r($score);
     }
 }
 

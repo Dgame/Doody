@@ -11,16 +11,16 @@ final class Score
     /**
      * @var array
      */
-    private $_results = [];
+    private $_scores = [];
 
     /**
      * Score constructor.
      *
-     * @param array $results
+     * @param array $scores
      */
-    public function __construct(array $results)
+    public function __construct(array $scores)
     {
-        $this->_results = array_filter($results, function ($item) {
+        $this->_scores = array_filter($scores, function ($item) {
             return $item > 0;
         });
     }
@@ -28,9 +28,9 @@ final class Score
     /**
      * @return array
      */
-    public function getResults() : array
+    public function getAllScores() : array
     {
-        return $this->_results;
+        return $this->_scores;
     }
 
     /**
@@ -38,10 +38,10 @@ final class Score
      *
      * @return int
      */
-    public function getAmountOf(string $word) : int
+    public function getScoreOf(string $word) : int
     {
-        if (array_key_exists($word, $this->_results)) {
-            return $this->_results[$word];
+        if (array_key_exists($word, $this->_scores)) {
+            return $this->_scores[$word];
         }
 
         return 0;
@@ -50,8 +50,8 @@ final class Score
     /**
      * @return int
      */
-    public function getTotalAmount() : int
+    public function getTotalScore() : int
     {
-        return array_sum($this->_results);
+        return array_sum($this->_scores);
     }
 }

@@ -16,14 +16,42 @@ final class Lexer
     /**
      * Lexer constructor.
      *
-     * @param string $filename
+     * @param array $keywords
      */
-    public function __construct(string $filename)
+    public function __construct(array $keywords)
     {
-        $json = file_get_contents($filename);
+        $this->_keywords = array_map('strtolower', $keywords);
+    }
 
-        $this->_keywords = json_decode($json, true)['Keywords'];
-        $this->_keywords = array_map('strtolower', $this->_keywords);
+    /**
+     * @return array
+     */
+    public function getKeywords() : array
+    {
+        return $this->_keywords;
+    }
+
+    /**
+     * @param string $word
+     *
+     * @return bool
+     */
+    private function isKeyword(string $word) : bool
+    {
+        return in_array($word, $this->getKeywords());
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return array
+     */
+    private function disassemble(string $content) : array
+    {
+        $content = strip_tags($content);
+        $words   = explode(' ', $content);
+
+        return array_map('strtolower', $words);
     }
 
     /**
@@ -34,16 +62,14 @@ final class Lexer
     public function caclulateScore(string $content) : Score
     {
         $results = [];
-        $content = strtolower(strip_tags($content));
-        foreach ($this->_keywords as $kword) {
-            $results[$kword] = 0;
+        foreach ($this->disassemble($content) as $word) {
+            if ($this->isKeyword($word)) {
+                $value = 0;
+                if (array_key_exists($word, $results)) {
+                    $value = $results[$word] + 1;
+                }
 
-            $len = strlen($kword) - 1;
-            $pos = 0;
-            while (($pos = strpos($content, $kword, $pos)) !== false) {
-                $results[$kword]++;
-//                print 'Found keword ' . $kword . ' @ ' . $pos . PHP_EOL;
-                $pos += $len;
+                $results[$word] = $value;
             }
         }
 
