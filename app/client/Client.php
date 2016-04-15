@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Crawler\Backend\Client;
+namespace App\Client;
 
-use Modules\Crawler\Backend\Client\Header\HeaderProvider;
+use App\Client\Header\HeaderProvider;
 
 /**
  * Class Client
- * @package Modules\Crawler\Backend\Client
+ * @package App\Client
  */
 final class Client
 {
@@ -42,19 +42,20 @@ final class Client
     private $_headerProvider = null;
 
     /**
-     * BaseClient constructor.
+     * Client constructor.
      */
     public function __construct()
     {
         $this->_handle = curl_init();
+        enforce((bool) $this->getHandle(), 'CURL init Fehler');
     }
 
     /**
-     * BaseClient destructor
+     *
      */
     public function __destruct()
     {
-        curl_close($this->_handle);
+        curl_close($this->getHandle());
     }
 
     /**
@@ -113,7 +114,7 @@ final class Client
     public function verifySSL(bool $host, bool $peer)
     {
         return $this->setOption(CURLOPT_SSL_VERIFYHOST, $host ? 2 : 0)
-            ->setOption(CURLOPT_SSL_VERIFYPEER, $peer);
+                    ->setOption(CURLOPT_SSL_VERIFYPEER, $peer);
     }
 
     /**
@@ -125,7 +126,7 @@ final class Client
     public function setTimeout(int $timeout, int $connection_timeout)
     {
         return $this->setOption(CURLOPT_TIMEOUT, $timeout)
-            ->setOption(CURLOPT_CONNECTTIMEOUT, $connection_timeout);
+                    ->setOption(CURLOPT_CONNECTTIMEOUT, $connection_timeout);
     }
 
     /**
@@ -220,7 +221,7 @@ final class Client
     {
         $this->setDefaults();
         $this->setOption(CURLOPT_URL, $url)
-            ->setOption(CURLOPT_POSTFIELDS, $data);
+             ->setOption(CURLOPT_POSTFIELDS, $data);
 
         if ($this->hasHeaderProvider()) {
             $this->setOption(CURLOPT_HTTPHEADER, $this->_headerProvider->provide());

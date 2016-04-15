@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Crawler\Backend\Client\Header;
+namespace App\Client\Header;
 
 /**
  * Class Content
- * @package Modules\Crawler\Backend\Client\Header
+ * @package App\Client\Header
  */
 final class Content extends Header
 {

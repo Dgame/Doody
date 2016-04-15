@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Crawler\Backend\Client\Header;
+namespace App\Client\Header;
 
 /**
  * Class Header
- * @package Modules\Crawler\Backend\Client\Header
+ * @package App\Client\Header
  */
 class Header implements HeaderInterface
 {

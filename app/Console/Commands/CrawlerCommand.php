@@ -8,7 +8,7 @@ use App\Crawler\Lexer;
 use Illuminate\Console\Command;
 
 /**
- * Class Crawl
+ * Class CrawlerCommand
  * @package App\Console\Commands
  */
 final class CrawlerCommand extends Command
@@ -52,7 +52,7 @@ final class CrawlerCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'crawl';
+    protected $signature = 'crawler';
 
     /**
      * The console command description.

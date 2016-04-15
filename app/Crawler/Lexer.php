@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Crawler\Backend;
+namespace App\Crawler;
 
 /**
  * Class Lexer
- * @package Modules\Crawler\Backend
+ * @package App\Crawler
  */
 final class Lexer
 {

@@ -78,7 +78,7 @@ return [
     |
      */
 
-    'key'             => env('APP_KEY', 'SomeRandomString'),
+    'key'             => env('APP_KEY', '7Aa5JcGVQvfbODIrYsXmaEF2HgKMWrq2'),
 
     'cipher'          => 'AES-256-CBC',
 
@@ -147,7 +147,6 @@ return [
          * Third Party Providers
          */
         Jenssegers\Mongodb\MongodbServiceProvider::class,
-        'Pingpong\Modules\ModulesServiceProvider',
     ],
 
     /*
@@ -196,7 +195,6 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Module'    => 'Pingpong\Modules\Facades\Module',
     ],
 
 ];
