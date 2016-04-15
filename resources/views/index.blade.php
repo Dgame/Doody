@@ -13,13 +13,17 @@
                         <img src="/assets/img/logo.png">
                     </a>
                 </div>
-                <form class="form-inline">
+                <form action="/search" class="form-inline">
                     <div class="form-group">
                         <input type="text" class="form-control" id="search" placeholder="Search...">
                         <button type="submit" class="btn btn-default" aria-label="Search">
                              <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                         </button>
                 </form>
+
+                {{ Form::open(['url' => '/search']) }}
+                {{ Form::text('username', '', ['class' => 'form-control', 'placeholder' => 'Search...']) }}
+                {{ Form::close() }}
             </div>
         </div>
     </body>

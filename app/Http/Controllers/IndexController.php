@@ -17,9 +17,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $pages = Page::all();
-        var_dump($pages);
-
         return view('index');
     }
 
@@ -33,5 +30,15 @@ class IndexController extends Controller
         $page->url     = 'http://www.heise.de';
         $page->content = 'tesstestestestestests';
         echo $page->save();
+    }
+
+    /**
+     * The Search action is called when a search term was tyed in and the search was
+     * fired
+     * @param string $term the search term
+     */
+    public function search($term)
+    {
+        var_dump($term);
     }
 }
