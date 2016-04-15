@@ -20,7 +20,7 @@ final class Score
      */
     public function __construct(array $scores)
     {
-        $this->_scores = array_filter($scores, function ($item) {
+        $this->_scores = array_filter($scores, function (int $item) {
             return $item > 0;
         });
     }

@@ -1,18 +1,21 @@
 <?php
 
-namespace Modules\Crawler\Console;
+namespace App\Console\Commands;
 
+use App\Client\Client;
+use App\Crawler\Crawler;
+use App\Crawler\Lexer;
 use Illuminate\Console\Command;
-use Modules\Crawler\Backend\Client\Client;
-use Modules\Crawler\Backend\Crawler;
-use Modules\Crawler\Backend\Lexer;
 
 /**
- * Class CrawlerCommand
- * @package Modules\Crawler\Console
+ * Class Crawl
+ * @package App\Console\Commands
  */
 final class CrawlerCommand extends Command
 {
+    /**
+     *
+     */
     const KEYWORDS = [
         'Assembler',
         'Assembly',
@@ -45,18 +48,19 @@ final class CrawlerCommand extends Command
     ];
 
     /**
-     * The console command name.
+     * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'command:crawler';
+    protected $signature = 'crawl';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description.';
+    protected $description = 'Display an inspiring quote';
+
 
     /**
      * @var Client|null
@@ -95,34 +99,11 @@ final class CrawlerCommand extends Command
     }
 
     /**
-     * Execute the console command.
      *
-     * @return mixed
      */
     public function fire()
     {
-        $crawler = new Crawler('http://www.heise.de/developer/');
-        $crawler->scan($this->getClient(), $this->getLexer());
+        $crawler = new Crawler('http://www.heise.de/developer/', $this->getClient(), $this->getLexer());
+        $crawler->scan();
     }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [];
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [];
-    }
-
 }

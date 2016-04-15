@@ -25,6 +25,9 @@ final class Crawler
         $this->_url = $url;
     }
 
+    /**
+     * @return string
+     */
     public function getUrl() : string
     {
         return $this->_url;
@@ -42,4 +45,3 @@ final class Crawler
         print_r($score);
     }
 }
-
