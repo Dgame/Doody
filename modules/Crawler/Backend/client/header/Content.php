@@ -1,10 +1,10 @@
 <?php
 
-namespace Doody\Client\Header;
+namespace Modules\Crawler\Backend\Client\Header;
 
 /**
  * Class Content
- * @package Doody\Client\Header
+ * @package Modules\Crawler\Backend\Client\Header
  */
 final class Content extends Header
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Doody\Client\Client;
+namespace Modules\Crawler\Backend\Client;
 
-use Doody\Client\Header\HeaderProvider;
+use Modules\Crawler\Backend\Client\Header\HeaderProvider;
 
 /**
  * Class Client
- * @package Doody\Client\Client
+ * @package Modules\Crawler\Backend\Client
  */
 final class Client
 {
@@ -21,7 +21,7 @@ final class Client
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_FAILONERROR    => true,
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_POST           => true,
+        CURLOPT_POST           => false,
         CURLOPT_HTTPAUTH       => CURLAUTH_ANY,
         CURLOPT_TIMEOUT        => 600,
         CURLOPT_CONNECTTIMEOUT => 180,
@@ -58,13 +58,21 @@ final class Client
     }
 
     /**
+     * @return resource
+     */
+    public function getHandle()
+    {
+        return $this->_handle;
+    }
+
+    /**
      * @param int $option
      *
      * @return mixed
      */
     public function getInfo($option = 0)
     {
-        return curl_getinfo($this->_handle, (int) $option);
+        return curl_getinfo($this->getHandle(), (int) $option);
     }
 
     /**
@@ -77,7 +85,7 @@ final class Client
     {
         $this->_options[$option] = true;
 
-        curl_setopt($this->_handle, $option, $value);
+        curl_setopt($this->getHandle(), $option, $value);
 
         return $this;
     }
@@ -131,11 +139,19 @@ final class Client
     }
 
     /**
+     * @return bool
+     */
+    public function hasHeaderProvider()
+    {
+        return $this->_headerProvider !== null;
+    }
+
+    /**
      * @return HeaderProvider
      */
     public function getHeaderProvider()
     {
-        if ($this->_headerProvider === null) {
+        if (!$this->hasHeaderProvider()) {
             $this->_headerProvider = new HeaderProvider();
         }
 
@@ -198,7 +214,7 @@ final class Client
      * @param string $url
      * @param        $data
      *
-     * @return mixed|string
+     * @return mixed
      */
     public function send(string $url, $data)
     {
@@ -206,13 +222,35 @@ final class Client
         $this->setOption(CURLOPT_URL, $url)
             ->setOption(CURLOPT_POSTFIELDS, $data);
 
-        if ($this->_headerProvider !== null) {
+        if ($this->hasHeaderProvider()) {
             $this->setOption(CURLOPT_HTTPHEADER, $this->_headerProvider->provide());
         }
 
-        $result = curl_exec($this->_handle);
+        $result = curl_exec($this->getHandle());
         if ($result === false) {
-            return curl_error($this->_handle);
+            return curl_error($this->getHandle());
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return mixed
+     */
+    public function receive(string $url)
+    {
+        $this->setDefaults();
+        $this->setOption(CURLOPT_URL, $url);
+
+        if ($this->hasHeaderProvider()) {
+            $this->setOption(CURLOPT_HTTPHEADER, $this->_headerProvider->provide());
+        }
+
+        $result = curl_exec($this->getHandle());
+        if ($result === false) {
+            return curl_error($this->getHandle());
         }
 
         return $result;
