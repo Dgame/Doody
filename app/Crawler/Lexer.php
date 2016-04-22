@@ -8,28 +8,36 @@ namespace App\Crawler;
  */
 final class Lexer
 {
-    /**
-     * @var array
-     */
-    private $_keywords = [];
-
-    /**
-     * Lexer constructor.
-     *
-     * @param array $keywords
-     */
-    public function __construct(array $keywords)
-    {
-        $this->_keywords = array_map('strtolower', $keywords);
-    }
-
-    /**
-     * @return array
-     */
-    public function getKeywords() : array
-    {
-        return $this->_keywords;
-    }
+    const KEYWORDS = [
+        'Assembler',
+        'Assembly',
+        'C#',
+        'C++',
+        'Closure',
+        'Cobol',
+        'Dart',
+        'Delphi',
+        'Erlang',
+        'F#',
+        'Fortran',
+        'Groovy',
+        'Haskel',
+        'Java',
+        'Lisp',
+        'Objective-C',
+        'PHP',
+        'Pascal',
+        'Perl',
+        'Pike',
+        'Prolog',
+        'Python',
+        'Ruby',
+        'Rust',
+        'Scala',
+        'Scheme',
+        'Swift',
+        'Vala',
+    ];
 
     /**
      * @param string $word
@@ -38,7 +46,7 @@ final class Lexer
      */
     private function isKeyword(string $word) : bool
     {
-        return in_array($word, $this->getKeywords());
+        return in_array($word, self::KEYWORDS);
     }
 
     /**
