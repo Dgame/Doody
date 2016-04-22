@@ -35,8 +35,6 @@ final class Crawler
      */
     private $_lexer = null;
 
-    use DispatchesJobs;
-
     /**
      * Crawler constructor.
      *
@@ -55,7 +53,7 @@ final class Crawler
     /**
      * @return int
      */
-    public function getId() : int
+    public function getId(): int
     {
         return $this->_id;
     }
@@ -63,7 +61,7 @@ final class Crawler
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return $this->_url;
     }
@@ -71,7 +69,7 @@ final class Crawler
     /**
      * @return Client
      */
-    public function getClient() : Client
+    public function getClient(): Client
     {
         return $this->_client;
     }
@@ -105,10 +103,10 @@ final class Crawler
         $provider = new UrlProvider($content);
         $urls     = $provider->findUrls();
 
-        foreach ($urls as $url) {
-            $job = new CrawlerJob($this->descendent($url));
-            $this->dispatch($job);
-        }
+        //foreach ($urls as $url) {
+        //$job = new CrawlerJob($this->descendent($url));
+        //$this->dispatch($job);
+        //}
 
         print_r($score);
 

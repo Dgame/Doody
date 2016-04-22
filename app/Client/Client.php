@@ -114,7 +114,7 @@ final class Client
     public function verifySSL(bool $host, bool $peer)
     {
         return $this->setOption(CURLOPT_SSL_VERIFYHOST, $host ? 2 : 0)
-                    ->setOption(CURLOPT_SSL_VERIFYPEER, $peer);
+            ->setOption(CURLOPT_SSL_VERIFYPEER, $peer);
     }
 
     /**
@@ -126,7 +126,7 @@ final class Client
     public function setTimeout(int $timeout, int $connection_timeout)
     {
         return $this->setOption(CURLOPT_TIMEOUT, $timeout)
-                    ->setOption(CURLOPT_CONNECTTIMEOUT, $connection_timeout);
+            ->setOption(CURLOPT_CONNECTTIMEOUT, $connection_timeout);
     }
 
     /**
@@ -221,7 +221,7 @@ final class Client
     {
         $this->setDefaults();
         $this->setOption(CURLOPT_URL, $url)
-             ->setOption(CURLOPT_POSTFIELDS, $data);
+            ->setOption(CURLOPT_POSTFIELDS, $data);
 
         if ($this->hasHeaderProvider()) {
             $this->setOption(CURLOPT_HTTPHEADER, $this->_headerProvider->provide());

@@ -4,8 +4,10 @@ namespace App\Console\Commands;
 
 use App\Client\Client;
 use App\Crawler\Crawler;
+use App\Jobs\CrawlerJob;
 use App\Crawler\Lexer;
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
  * Class CrawlerCommand
@@ -13,6 +15,8 @@ use Illuminate\Console\Command;
  */
 final class CrawlerCommand extends Command
 {
+    use DispatchesJobs;
+
     /**
      *
      */
@@ -44,7 +48,7 @@ final class CrawlerCommand extends Command
         'Scala',
         'Scheme',
         'Swift',
-        'Vala'
+        'Vala',
     ];
 
     /**
@@ -60,7 +64,6 @@ final class CrawlerCommand extends Command
      * @var string
      */
     protected $description = 'Display an inspiring quote';
-
 
     /**
      * @var Client|null
@@ -85,7 +88,7 @@ final class CrawlerCommand extends Command
     /**
      * @return Client
      */
-    public function getClient() : Client
+    public function getClient(): Client
     {
         return $this->_client;
     }
@@ -93,7 +96,7 @@ final class CrawlerCommand extends Command
     /**
      * @return Lexer
      */
-    public function getLexer() : Lexer
+    public function getLexer(): Lexer
     {
         return $this->_lexer;
     }
@@ -103,7 +106,7 @@ final class CrawlerCommand extends Command
      */
     public function fire()
     {
-        $crawler = new Crawler('http://www.heise.de/developer/', $this->getClient(), $this->getLexer());
-        $crawler->scan();
+        //$crawler = new Crawler('http://www.heise.de/developer/', $this->getClient(), $this->getLexer());
+        $this->dispatch(new CrawlerJob('http://heise.de'));
     }
 }
