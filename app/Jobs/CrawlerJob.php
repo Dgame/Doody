@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Page;
 use App\Crawler\Lexer;
 use App\Crawler\Provider\UrlProvider;
 use App\Client\Client;
@@ -36,7 +37,7 @@ final class CrawlerJob extends Job implements SelfHandling, ShouldQueue
     /**
      * @return null|string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return $this->_url;
     }
@@ -44,7 +45,7 @@ final class CrawlerJob extends Job implements SelfHandling, ShouldQueue
     /**
      *
      */
-    public function handle()
+    public function handle(): bool
     {
         if ($this->alreadyVisited()) {
             return false;
@@ -58,7 +59,11 @@ final class CrawlerJob extends Job implements SelfHandling, ShouldQueue
         $content = $client->receive($this->getUrl());
         $score   = $lexer->caclulateScore($content);
 
-        self::$Visited[$this->getUrl()] = true;
+        //self::$Visited[$this->getUrl()] = true;
+        $page        = new Page();
+        $page->url   = $this->getUrl();
+        $page->score = $score;
+        $result      = $page->save();
 
         preg_match_all('#<a href="(\w+.*?)"#i', $content, $urls);
 
@@ -70,14 +75,14 @@ final class CrawlerJob extends Job implements SelfHandling, ShouldQueue
 
         //        print_r($score);
 
-        return true;
+        return $result;
     }
 
     /**
      * @return bool
      */
-    private function alreadyVisited()
+    private function alreadyVisited(): bool
     {
-        return array_key_exists($this->getUrl(), self::$Visited);
+        return Page::where('url', '=', $this->getUrl())->first() ? true : false;
     }
 }
