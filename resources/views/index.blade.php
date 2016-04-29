@@ -13,17 +13,13 @@
                         <img src="/assets/img/logo.png">
                     </a>
                 </div>
-                <form action="/search" class="form-inline">
+                <form action="/search" method="post" class="form-inline">
+                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="search" placeholder="Search...">
-                        <button type="submit" class="btn btn-default" aria-label="Search">
-                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                        </button>
+                        <input type="text" class="form-control" name="search" placeholder="Search...">
+                    </div>
+                    <input type="submit" class="btn btn-primary" />
                 </form>
-
-                {{ Form::open(['url' => '/search']) }}
-                {{ Form::text('username', '', ['class' => 'form-control', 'placeholder' => 'Search...']) }}
-                {{ Form::close() }}
             </div>
         </div>
     </body>

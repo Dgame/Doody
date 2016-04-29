@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests\SearchRequest;
 use App\Http\Controllers\Controller;
 use App\Page;
 
@@ -37,8 +37,9 @@ class IndexController extends Controller
      * fired
      * @param string $term the search term
      */
-    public function search($term)
+    public function search(SearchRequest $request)
     {
-        var_dump($term);
+        var_dump($request->search);
+        exit;
     }
 }
