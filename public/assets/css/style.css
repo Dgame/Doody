@@ -25,3 +25,18 @@ body {
 .title {
     font-size: 96px;
 }
+
+.result-header {
+   background-color: #e8e8e8;
+   border-bottom-color: #000000;
+   border-bottom-style: solid;
+   border-bottom-width: 0.5px;
+}
+
+.result-header-search {
+    margin-top: 0.5%;
+}
+
+form input[type="text"].result-header-search-bar {
+    /*width: 80%;*/
+}

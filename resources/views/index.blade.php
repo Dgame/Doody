@@ -8,7 +8,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class"col-md-12">
+                <div class="col-md-12">
                      <a href="/assets/img/logo.png">
                         <img src="/assets/img/logo.png">
                     </a>
@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="search" placeholder="Search...">
                     </div>
-                    <input type="submit" class="btn btn-primary" />
+                    <input type="submit" value="Search" class="btn btn-primary" />
                 </form>
             </div>
         </div>
