@@ -40,8 +40,13 @@ class IndexController extends Controller
     public function search(SearchRequest $request)
     {
         $search_regex = sprintf('/.*%s/i', $request->search);
-        $results      = Page::where('content', 'regexp', $search_regex)->get();
+        $results      = Page::where('url', 'regexp', $search_regex)->get();
 
-        return view('results', ['results' => $results]);
+        return view('results', 
+            [
+                'results' => $results,
+                'request' => $request->search,
+            ]
+        );
     }
 }
