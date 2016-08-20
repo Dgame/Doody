@@ -58,9 +58,7 @@ class IndexController extends AbstractActionController
     {
         $this->layout('layout/result');
         $query = $this->params()->fromRoute('query', '');
-        echo $query;
-        echo 'woo';
-        exit;
+        
         //Mongokram Abfragen
         return new ViewModel();
     }
