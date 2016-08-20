@@ -386,7 +386,12 @@ return array (
         'type' => 'Zend\\Router\\Http\\Segment',
         'options' => 
         array (
-          'route' => '/application[/:action]',
+          'route' => '/application[/:action[/:query]]',
+          'constraints' => 
+          array (
+            'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+            'query' => '[a-zA-Z0-9_-]+',
+          ),
           'defaults' => 
           array (
             'controller' => 'Application\\Controller\\IndexController',
@@ -405,18 +410,6 @@ return array (
   ),
   'view_manager' => 
   array (
-    'display_not_found_reason' => true,
-    'display_exceptions' => true,
-    'doctype' => 'HTML5',
-    'not_found_template' => 'error/404',
-    'exception_template' => 'error/index',
-    'template_map' => 
-    array (
-      'layout/layout' => '/srv/http/doody/http/module/Application/config/../view/layout/layout.phtml',
-      'application/index/index' => '/srv/http/doody/http/module/Application/config/../view/application/index/index.phtml',
-      'error/404' => '/srv/http/doody/http/module/Application/config/../view/error/404.phtml',
-      'error/index' => '/srv/http/doody/http/module/Application/config/../view/error/index.phtml',
-    ),
     'template_path_stack' => 
     array (
       0 => '/srv/http/doody/http/module/Application/config/../view',
