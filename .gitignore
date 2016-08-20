@@ -1,3 +1,7 @@
 /vendor
 idea
 *.lock
+tags
+.env
+/storage
+.tmuxp.yaml
