@@ -1,0 +1,34 @@
+<?= $this->doctype() ?>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <?= $this->headTitle('Doody')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?= $this->headMeta()
+             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+             ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <!-- Le styles -->
+    <?php
+    $icon = [
+        'rel'  => 'shortcut icon',
+        'type' => 'image/vnd.microsoft.icon',
+        'href' => $this->basePath() . '/img/doody/favicon.ico'
+    ];
+    ?>
+    <?= $this->headLink($icon)
+             ->prependStylesheet($this->basePath('css/doody/search.css'));
+    ?>
+
+    <!-- Scripts -->
+    <?= $this->headScript()
+             ->prependFile($this->basePath('js/bootstrap.min.js'))
+             ->prependFile($this->basePath('js/jquery-2.2.4.min.js'))
+    ?>
+</head>
+<body>
+<?= $this->content; ?>
+</body>
+</html>
