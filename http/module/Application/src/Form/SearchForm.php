@@ -20,15 +20,14 @@ class SearchForm extends Form
                 ],
             ]
         );
-
         $this->add(
             [
                 'name'       => 'submit',
-                'type'       => 'submit',
+                'type'       => 'image',
                 'attributes' =>
                 [
-                    'id'    => 'search',
-                    'value' => 'Suchen',
+                    'src' => '/img/doody/search-2.png',
+                    'id'  => 'search',
                 ],
             ]
         );
