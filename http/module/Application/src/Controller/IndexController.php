@@ -89,6 +89,7 @@ class IndexController extends AbstractActionController
                         ],
                         'pr'      => 1,
                         'url'     => 1,
+                        'title'   => 1,
                         'score'   => ['$meta' => 'textScore'],
                     ],
                 ],

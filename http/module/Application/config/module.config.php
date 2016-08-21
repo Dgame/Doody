@@ -30,7 +30,7 @@ return [
                     'route'       => '/application[/:action[/:query]]',
                     'constraints' => [
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'query'  => '[a-zA-Z0-9_-]+',
+                        'query'  => '.+',
                     ],
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
