@@ -105,10 +105,13 @@ class IndexController extends AbstractActionController
             ]
         );
 
+        $form   = new SearchForm();
+
         return new ViewModel(
             [
                 'query'   => $query,
                 'results' => $results,
+                'form'    => $form,
             ]
         );
     }

@@ -1,9 +1,15 @@
 <div id="header">
     <img src="<?= $this->basePath('img/doody/logo.png'); ?>" alt="Doody-Suche" title="Doody Suche" />
-    <form action="#" method="get" id="searchbar">
-        <input type="text" name="q" value="<?= $query; ?>" placeholder="In Doody suchen" />
-        <input type="image" src="<?= $this->basePath('img/doody/search-2.png'); ?>" alt="Suchen" title="Suchen" id="search" />
-    </form>
+    <?php
+    $form->setAttribute('action', $this->url('application', ['action' => 'index']));
+    $form->setAttribute('id', 'searchbar');
+    $form->prepare();
+    ?>
+
+    <?= $this->form()->openTag($form); ?>
+    <?= $this->formText($form->get('query')); ?>
+    <?= $this->formSubmit($form->get('submit')); ?>
+    <?= $this->form()->closeTag(); ?>
 </div>
 <div id="results">
     <?php foreach ($results as $result): ?>
