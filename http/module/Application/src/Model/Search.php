@@ -33,19 +33,22 @@ class Search implements InputFilterAwareInterface
             $inputFilter = new InputFilter();
 
             $inputFilter->add([
-                'name' => 'query',
+                'name'     => 'query',
                 'required' => true,
-                'filters' => [
+                'filters'  =>
+                [
                     ['name' => 'StripTags'],
                     ['name' => 'StringTrim'],
                 ],
-                'validators' => [
+                'validators' =>
+                [
                     [
-                        'name' => 'StringLength',
-                        'options' => [
+                        'name'    => 'StringLength',
+                        'options' =>
+                        [
                             'encoding' => 'UTF-8',
-                            'max' => 255,
-                            'min' => 1,
+                            'max'      => 255,
+                            'min'      => 1,
                         ],
                     ],
                 ],

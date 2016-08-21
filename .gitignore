@@ -5,3 +5,5 @@ tags
 .env
 /storage
 .tmuxp.yaml
+.php_cs
+

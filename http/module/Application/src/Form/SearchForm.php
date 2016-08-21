@@ -12,9 +12,10 @@ class SearchForm extends Form
 
         $this->add(
             [
-                'name' => 'query',
-                'type' => 'text',
-                'attributes' => [
+                'name'       => 'query',
+                'type'       => 'text',
+                'attributes' =>
+                [
                     'placeholder' => 'In Doody suchen',
                 ],
             ]
@@ -22,10 +23,11 @@ class SearchForm extends Form
 
         $this->add(
             [
-                'name' => 'submit',
-                'type' => 'submit',
-                'attributes' => [
-                    'id' => 'search',
+                'name'       => 'submit',
+                'type'       => 'submit',
+                'attributes' =>
+                [
+                    'id'    => 'search',
                     'value' => 'Suchen',
                 ],
             ]
