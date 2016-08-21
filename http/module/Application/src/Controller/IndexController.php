@@ -80,18 +80,16 @@ class IndexController extends AbstractActionController
                     //Only take the fields, we are interested in
                     '$project' =>
                     [
+                        '_id'     => 0,
+                        'content' =>
                         [
-                            '_id'     => 0,
-                            'content' =>
-                                [
-                                    //Only take the first 50 characters of the
-                                    //content for display purposes
-                                    '$substr' => ['$content', 0, 50],
-                                ],
-                            'pr'      => 1,
-                            'url'     => 1,
-                            'score'   => ['$meta' => 'textScore'],
+                            //Only take the first 50 characters of the
+                            //content for display purposes
+                            '$substr' => ['$content', 0, 50],
                         ],
+                        'pr'      => 1,
+                        'url'     => 1,
+                        'score'   => ['$meta' => 'textScore'],
                     ],
                 ],
                 [
@@ -106,6 +104,11 @@ class IndexController extends AbstractActionController
             ]
         );
 
-        return new ViewModel();
+        return new ViewModel(
+            [
+                'query'   => $query,
+                'results' => $results,
+            ]
+        );
     }
 }
