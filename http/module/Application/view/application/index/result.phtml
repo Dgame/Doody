@@ -37,7 +37,8 @@
                 <a href="#">&lt;&lt;</a>
             </li>
         <?php endif; ?>
-        <?php for ($i = $page - 10; $i < $page + 10; $i++): ?>
+        <?php $upper_limit = $page + 10 < $total_pages ? $page + 10: $total_pages;?>
+        <?php for ($i = $page - 10 > 9 ? $page - 10: 0; $i < $upper_limit; $i++): ?>
             <?php if ($i !== $page): ?>
                 <li>
                     <a href="/application/result/<?= $query; ?>/<?= $i; ?>"><?= $i; ?></a>
@@ -48,7 +49,7 @@
                 </li>
             <?php endif; ?>
         <?php endfor; ?>
-        <?php if ($page < $total_pages): ?>
+        <?php if ($page < $total_pages - 1): ?>
             <li>
                 <a href="/application/result/<?= $query; ?>/<?= $page + 1; ?>" aria-label="Next">
                     &gt;&gt;
