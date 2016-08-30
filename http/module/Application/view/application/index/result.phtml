@@ -19,7 +19,45 @@
         <p class="link"><a href="<?= $result['url']; ?>"><?= $result['title']; ?></a></p>
         <p class="url"><?= $result['url'] ?></p>
         <p><?= $result['content']; ?></p>
+        <p>Score: <?= $result['score']; ?></p>
+        <p>Pagerank: <?= $result['pr']; ?></p>
     </div>
     <?php endforeach; ?>
 </div>
-
+<div>
+    <ul class="pagination">
+        <?php if ($page > 0): ?>
+            <li>
+                <a href="/application/result/<?= $query; ?>/<?= $page - 1 ?>" aria-label="Previous">
+                    &lt;&lt;
+                </a>
+            </li>
+        <?php else: ?>
+            <li class="disabled">
+                <a href="#">&lt;&lt;</a>
+            </li>
+        <?php endif; ?>
+        <?php for ($i = $page - 10; $i < $page + 10; $i++): ?>
+            <?php if ($i !== $page): ?>
+                <li>
+                    <a href="/application/result/<?= $query; ?>/<?= $i; ?>"><?= $i; ?></a>
+                </li>
+            <?php else: ?>
+                <li class="active">
+                    <a href="#"><?= $i; ?></a>
+                </li>
+            <?php endif; ?>
+        <?php endfor; ?>
+        <?php if ($page < $total_pages): ?>
+            <li>
+                <a href="/application/result/<?= $query; ?>/<?= $page + 1; ?>" aria-label="Next">
+                    &gt;&gt;
+                </a>
+            </li>
+        <?php else: ?>
+            <li class="disabled">
+                <a href="#">&gt;&gt;</a>
+            </li>
+        <?php endif; ?>
+    </ul>
+</div>

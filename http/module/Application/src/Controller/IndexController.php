@@ -17,8 +17,9 @@ use Application\Model\Search;
 
 class IndexController extends AbstractActionController
 {
-    const DB_NAME       = 'mongodb';
-    const COLLECTION    = 'pages';
+    const DB_NAME          = 'mongodb';
+    const COLLECTION       = 'pages';
+    const RESULTS_PER_PAGE = 20;
 
     public function indexAction()
     {
@@ -62,12 +63,30 @@ class IndexController extends AbstractActionController
     public function resultAction()
     {
         $this->layout('layout/result');
-        $query = $this->params()->fromRoute('query', '');
+        $query  = $this->params()->fromRoute('query', '');
+        $page   = (int) $this->params()->fromRoute('page', 0);
+        $skip   = $page * self::RESULTS_PER_PAGE;
 
-        $client = new Client();
-        $coll   = $client->selectCollection(self::DB_NAME, self::COLLECTION);
+        $client      = new Client();
+        $coll        = $client->selectCollection(self::DB_NAME, self::COLLECTION);
+        $results     = $this->search($coll, $query, $skip);
+        $total_pages = $this->getTotalPages($coll, $query);
+        $form        = new SearchForm();
 
-        $results = $coll->aggregate(
+        return new ViewModel(
+            [
+                'query'       => $query,
+                'results'     => $results,
+                'page'        => $page,
+                'total_pages' => $total_pages,
+                'form'        => $form,
+            ]
+        );
+    }
+
+    private function search(Collection $coll, string $query, int $skip)
+    {
+        return $coll->aggregate(
             [
                 [
                     //Search for all occurences, which are similar to the query
@@ -102,17 +121,39 @@ class IndexController extends AbstractActionController
                         'pr'    => -1,
                     ],
                 ],
+                [
+                    '$skip' => $skip,
+                ],
+                [
+                    '$limit' => self::RESULTS_PER_PAGE,
+                ],
             ]
         );
+    }
 
-        $form   = new SearchForm();
-
-        return new ViewModel(
+    public function getTotalPages(Collection $coll, string $query) : int
+    {
+        $total = $coll->aggregate(
             [
-                'query'   => $query,
-                'results' => $results,
-                'form'    => $form,
+                [
+                    '$match' =>
+                    [
+                        '$text' => ['$search' => $query],
+                    ],
+                ],
+                [
+                    '$group' =>
+                    [
+                        '_id'   => 1,
+                        'total' =>
+                        [
+                            '$sum' => 1,
+                        ],
+                    ],
+                ]
             ]
-        );
+        )->toArray()[0]['total'];
+
+        return (int) ceil($total / self::RESULTS_PER_PAGE);
     }
 }
