@@ -72,6 +72,7 @@ class IndexController extends AbstractActionController
         $results     = $this->search($coll, $query, $skip);
         $total_pages = $this->getTotalPages($coll, $query);
         $form        = new SearchForm();
+        $form->setData(['query' => $query]);
 
         return new ViewModel(
             [
@@ -133,7 +134,7 @@ class IndexController extends AbstractActionController
 
     public function getTotalPages(Collection $coll, string $query) : int
     {
-        $total = $coll->aggregate(
+        $cursor = $coll->aggregate(
             [
                 [
                     '$match' =>
@@ -150,10 +151,12 @@ class IndexController extends AbstractActionController
                             '$sum' => 1,
                         ],
                     ],
-                ]
+                ],
             ]
-        )->toArray()[0]['total'];
-
-        return (int) ceil($total / self::RESULTS_PER_PAGE);
+        )->toArray();
+        if (array_key_exists(0, $cursor)) {
+            return (int) ceil($cursor[0]['total'] / self::RESULTS_PER_PAGE);
+        }
+        return 0;
     }
 }
